@@ -1,0 +1,460 @@
+﻿<Window xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:my="clr-namespace:SUNC_Main_DoctorProcess"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        x:Class="SUNC_Main_DoctorProcess.MainWindow"
+        xmlns:local="clr-namespace:SUNC_Main_DoctorProcess"  
+        xmlns:resx="clr-namespace:SUNC_Main_DoctorProcess.Properties"
+        Title="前台护士管理程序" Loaded="Window_Loaded" 
+        Topmost="False" AllowsTransparency="True" WindowStyle="None">
+    <!--dx:ThemeManager.ThemeName="Office2010Silver"-->
+    <Window.Resources>
+        <!--<ResourceDictionary x:Key="FadeBrush">
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                <local:PtoI x:Key="p2i"/>
+                </ResourceDictionary>
+                <ResourceDictionary Source="test.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>-->
+
+        <Style TargetType="{x:Type dxg:GridColumn}">
+            <!--列头居中-->
+            <Setter Property="HorizontalHeaderContentAlignment" Value="Center" />
+
+            <!--列值居中-->
+            <Setter Property="EditSettings">
+                <Setter.Value>
+                    <dxe:TextEditSettings HorizontalContentAlignment="Center" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <local:Conv x:Key="c"/>
+
+        <Style x:Key="optimizedRowStyle" TargetType="{x:Type dxg:RowControl}">
+            <Setter Property="Background" Value="{Binding Row.VL_V_VerifyReport, Converter={StaticResource c}}"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="MinWidth" Value="30"></Setter>
+            <Setter Property="MinHeight" Value="20"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="2"  CornerRadius="3"   
+                                Background="{TemplateBinding Background}"  
+                                Margin="{TemplateBinding Margin}"  
+                                Padding="{TemplateBinding Padding}"  
+                                MinWidth="{TemplateBinding MinWidth}"   
+                                MinHeight="{TemplateBinding MinHeight}"  
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"   
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Label Foreground="{TemplateBinding Foreground}" 
+                                       Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                       VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                       FontSize="{TemplateBinding FontSize}" 
+                                       FontFamily="{TemplateBinding FontFamily}" 
+                                       Content="{TemplateBinding Content}"></Label>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Template" >
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderThickness="2" BorderBrush="SkyBlue" CornerRadius="3" Background="{TemplateBinding Background}"  
+                                        Margin="{TemplateBinding Margin}"  
+                                        Padding="{TemplateBinding Padding}"  
+                                        MinWidth="{TemplateBinding MinWidth}"   
+                                        MinHeight="{TemplateBinding MinHeight}"  
+                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"   
+                                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                    <Label Foreground="{TemplateBinding Foreground}" 
+                                               Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                               VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                               FontSize="{TemplateBinding FontSize}" 
+                                               FontFamily="{TemplateBinding FontFamily}" 
+                                               Content="{TemplateBinding Content}"></Label>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter Property="Button.BorderBrush" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <DockPanel Margin="0" Background="#FF26B7BB" LastChildFill="True">
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42"></ColumnDefinition>
+                    <ColumnDefinition Width="320"></ColumnDefinition>
+                    <ColumnDefinition Width="55*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"  Source="image/6.png" Margin="5,0,0,0" />
+                <Label Grid.Column="1" x:Name="labtitle"  Content="优卡云护士管理系统" 
+                       VerticalContentAlignment="Center"  HorizontalAlignment="Right" FontSize="26" FontWeight="Bold" Foreground="White" Width="249" Margin="0,0,69,0" />
+                <WrapPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button x:Name="Dhelp" Content="帮助" Focusable="False" Background="{x:Null}" HorizontalAlignment="Center"  VerticalAlignment="Center"  Foreground="White" Click="Dhelp_Click"  />
+                    <Button x:Name="Dmin" Content="—" Focusable="False" Background="{x:Null}"   HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Click="btnmin_Click" Foreground="White"/>
+                    <Button x:Name="Dclose" Content="X" Focusable="False" Background="{x:Null}"  HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White"  Click="btnclose_Click" />
+                </WrapPanel>
+            </Grid>
+
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" x:Name="Uname" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0"
+                           Background="Pink" FontSize="14" Content="U盘可用"></Label>
+                    <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"  FontSize="14" FontWeight="Bold" Foreground="White">
+                        <!--<TextBlock TextWrapping="Wrap" Text=""/>-->
+                        <Label.Content>*注:绿色记录为审核通过的记录，黑色记录为未审核或不通过的记录。</Label.Content>
+                    </Label>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal"  Grid.Row="1" Margin="0 13">
+                    <Label x:Name="tishi" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="19" FontWeight="Light"  Foreground="Red"></Label>
+                    <Button x:Name="tishi1" Content="立即处理" HorizontalContentAlignment="Center" Background="#FFABD8AB" Foreground="#FF18555F" Click="tishi1_Click"/>
+                    <Button x:Name="tishi2" Content="稍后处理" HorizontalContentAlignment="Center" Background="#FFABD8AB" Foreground="#FF18555F" Click="tishi2_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Background="#FF26B7BB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="388*"></RowDefinition>
+                    <RowDefinition Height="13*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="8*"></ColumnDefinition>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Grid.RowSpan="2" Margin="0,14,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1"></RowDefinition>
+                        <RowDefinition Height="60*"></RowDefinition>
+                        <RowDefinition Height="12*"></RowDefinition>
+                        <RowDefinition Height="12*"></RowDefinition>
+                        <RowDefinition Height="35*"></RowDefinition>
+                        <RowDefinition Height="88*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Source="image/touxiang.png" Margin="22,18,20,10"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="姓名：" VerticalContentAlignment="Bottom" HorizontalAlignment="Right" FontSize="14"></Label>
+                    <Label Grid.Row="4" Grid.Column="0" Content="就诊卡号：" VerticalContentAlignment="Center" HorizontalAlignment="Right" FontSize="14"></Label>
+                    <Label Grid.Row="5" Grid.Column="0" Content="诊疗内容：" VerticalContentAlignment="Top" HorizontalAlignment="Right" FontSize="14" Margin="0,5,0,13"></Label>
+                    <Label Grid.Row="3" Grid.Column="1" x:Name="name" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"></Label>
+                    <Label Grid.Row="4" Grid.Column="1" x:Name="cardcode" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                    <TextBlock x:Name="StudyMethod" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" Height="Auto" Margin="0,9,0,0" VerticalAlignment="Top" TextAlignment="Left" />
+                    <!--<Calendar Margin="0,50,0,0" Name="calendarCtl" DisplayMode="Month" SelectionMode="SingleRange"/>-->
+                    <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="12*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBox x:Name="texttime" Width="80" Height="25" BorderThickness="0">
+                                <TextBox.Resources>
+                                    <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" Text="点击下方时间" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <Button Content="查询" Click="btnOK_Click"></Button>
+                        </StackPanel>
+                        <Calendar Grid.Row="1" Name="caldate"  RenderTransformOrigin="0.268,0.516">
+                            <Calendar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0.636"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Calendar.RenderTransform>
+                        </Calendar>
+                    </Grid>
+                </Grid>
+
+                <DockPanel Grid.Column="1" Margin="5,3,10,10" Background="White"  LastChildFill="True" Grid.ColumnSpan="2">
+                    <DockPanel DockPanel.Dock="Top" Height="110" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="65"></ColumnDefinition>
+                                <ColumnDefinition Width="80*"></ColumnDefinition>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="就诊号：" VerticalContentAlignment="Bottom" HorizontalAlignment="Right" FontSize="14"  Margin="3,6,0,0" ></Label>
+                            <Label Grid.Row="1" Grid.Column="0" Content="流水号：" VerticalContentAlignment="Center" HorizontalAlignment="Right" FontSize="14"  Margin="3,6,0,0" ></Label>
+                            <Label Grid.Row="2" Grid.Column="0" Content="注册号：" VerticalContentAlignment="Top" HorizontalAlignment="Right" FontSize="14"  Margin="3,6,0,0"></Label>
+
+                            <TextBox Grid.Row="0" Grid.Column="1"  x:Name="keys" FontSize="14" Width="180" 
+                                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  
+                                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,6,2,0" Padding="2" Height="28" KeyDown="keys_KeyDown" >
+                                <TextBox.Resources>
+                                    <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" Text="请输入就诊卡号"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+
+                            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="keys1" FontSize="14" Width="180" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  
+                                 HorizontalAlignment="Left" Margin="0,6,2,0" Padding="2" Height="28" VerticalAlignment="Top" KeyDown="keys_KeyDown">
+                                <TextBox.Resources>
+                                    <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" Text="请输入流水号"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+
+                            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="keys2" FontSize="14" Width="180" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  
+                                 HorizontalAlignment="Left" Margin="0,6,2,0" Padding="2" Height="28" VerticalAlignment="Bottom" KeyDown="keys_KeyDown">
+                                <TextBox.Resources  >
+                                    <VisualBrush  x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontStyle="Italic" Text="请输入注册号" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+
+                            
+                            
+                            <Grid  Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="60" ></ColumnDefinition>
+                                    <ColumnDefinition Width="60" ></ColumnDefinition>
+                                    <ColumnDefinition Width="60" ></ColumnDefinition>
+                                    <ColumnDefinition Width="120" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+
+
+                                <Button  Grid.Row="0" Grid.Column="0" x:Name="ser" Content="查询" 
+                                         VerticalAlignment="Center" HorizontalAlignment="Left"  Background="#FF8EDC86" 
+                                         Click="ser_Click" Padding="6,10" FontSize="16"/>
+                                <Button  Grid.Row="0" Grid.Column="1" x:Name="sendcard" Content="发卡" VerticalAlignment="Center" HorizontalAlignment="Left" Background="LightPink"  Click="sendcard_Click" Padding="6,10" FontSize="16" />
+                                <Button  Grid.Row="0" Grid.Column="2" x:Name="print" Content="打印" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF8EDC86"  Click="print_Click" Padding="6,10" FontSize="16" />
+                                <Button  Grid.Row="0" Grid.Column="3" x:Name="reset" Content="一键重置" VerticalAlignment="Center" HorizontalAlignment="Left"  Background="#FF8EDC86" Click="reset_Click" Padding="0,10" Width="120" FontSize="16" />
+                            </Grid>
+
+                            <Grid  Grid.Row="2" Grid.Column="2">
+                                <Grid.ColumnDefinitions >
+
+                                    <ColumnDefinition Width="110" ></ColumnDefinition>
+                                    <ColumnDefinition Width="90" ></ColumnDefinition>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <!--<Button   Grid.Row="0" Grid.Column="0" x:Name="updata" Content="更换卡片" VerticalAlignment="Center" HorizontalAlignment="Left" Background="SkyBlue" Click="updata_Click"/>-->
+                                <Button  Grid.Row="0" Grid.Column="0" x:Name="twoMomthData" Content="提取一个月前报告" VerticalAlignment="Center" HorizontalAlignment="Left" Background="SkyBlue" Click="twoMomthData_Click"/>
+                                <Button  Grid.Row="0" Grid.Column="1" x:Name="todaysend" Content="发卡统计" VerticalAlignment="Center" HorizontalAlignment="Left" Background="SkyBlue" Click="todaysend_ItemClick" Margin="10,0,0,0"/>
+                                <Button  Grid.Row="0" Grid.Column="2" x:Name="FilmProcssing" Content="胶片发放" VerticalAlignment="Center" HorizontalAlignment="Left" Background="LightPink" Click="FilmProcssing_ItemClick" Margin="10,0,0,0"/>
+                            </Grid>
+
+                        </Grid>
+                    </DockPanel>
+
+
+
+
+
+                    <my:DataGridPage DockPanel.Dock="Bottom"  x:Name="gridpage" VerticalAlignment="Center"  HorizontalContentAlignment="Center">
+                    </my:DataGridPage>
+                    <dxb:BarManager dx:ThemeManager.ThemeName="Office2013LightGray"  ToolbarGlyphSize="Default" Margin="0,5,0,0">
+                        <dxb:BarManager.Bars>
+                            <dxb:Bar x:Name="mainMenuBar" Caption="菜单栏" IsMainMenu="False" AllowCustomizationMenu="False">
+                                <dxb:Bar.DockInfo>
+                                    <dxb:BarDockInfo ContainerType="Top"/>
+                                </dxb:Bar.DockInfo>
+                                <dxb:BarButtonItem Content="发卡" x:Name="stater"  BarItemDisplayMode="ContentAndGlyph"
+                                                   Glyph="{dx:DXImage Image=Download_32x32.png}" ItemClick="stater_ItemClick" />
+
+                                <dxb:BarSubItem Content="打印" BarItemDisplayMode="ContentAndGlyph" x:Name="States" 
+                                                Glyph="{dx:DXImage Image=Print_32x32.png}">
+                                    <dxb:BarButtonItem Content="打印报告" x:Name="medical" ItemClick="medical_ItemClick"/>
+                                    <dxb:BarButtonItem Content="打印贴纸" x:Name="sick" ItemClick="sick_ItemClick"/>
+                                    <dxb:BarButtonItem Content="打印胶片" x:Name="state" ItemClick="state_ItemClick"/>
+                                </dxb:BarSubItem>
+                                <dxb:BarSubItem BarItemDisplayMode="ContentAndGlyph" Content="重置" x:Name="rest" 
+                                                Glyph="{dx:DXImage Image=Refresh2_32x32.png}">
+                                    <dxb:BarButtonItem Content="重置发卡状态" x:Name="reststater" ItemClick="reststater_ItemClick"/>
+                                    <dxb:BarButtonItem Content="重置打印报告状态"  x:Name="restmedical" ItemClick="restmedical_ItemClick"/>
+                                    <dxb:BarButtonItem Content="重置打印胶片状态"  x:Name="restsick" ItemClick="restsick_ItemClick"/>
+                                    <dxb:BarButtonItem Content="重置打印贴纸状态"  x:Name="reststate" ItemClick="reststate_ItemClick"/>
+                                </dxb:BarSubItem>
+                                <dxb:BarButtonItem Content="发送选中检查的记录" x:Name="statetwoMomethData"  BarItemDisplayMode="ContentAndGlyph" Glyph="{dx:DXImage Image=Download_32x32.png}" ItemClick="statetwoMomethData_ItemClick"/>
+                                <dxb:BarCheckItem Content="全部" x:Name="all" ItemClick="all_ItemClick" IsChecked="True"/>
+                                <dxb:BarCheckItem Content="已刻录" x:Name="recorded" ItemClick="recorded_ItemClick" IsChecked="False"/>
+                                <dxb:BarCheckItem Content="未刻录"  x:Name="unrecord" ItemClick="unrecord_ItemClick" IsChecked="False"/>
+                                <dxb:BarButtonItem Content="设置" x:Name="options" ItemClick="options_ItemClick"/>
+                            </dxb:Bar>
+                            <!--<dxb:Bar IsStatusBar="True">
+                                <dxb:Bar.DockInfo>
+                                    <dxb:BarDockInfo ContainerType="Bottom"/>
+                                </dxb:Bar.DockInfo>
+                            </dxb:Bar>-->
+                        </dxb:BarManager.Bars>
+                        <dxg:GridControl x:Name="gridControl1" FontSize="14"  AutoGenerateColumns="None"  EnableSmartColumnsGeneration="True"  
+                                         VerticalAlignment="Stretch" IsRecursiveExpand="True" AllowDrop="True" ShowBorder="False" Margin="0,3,0,0" >
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn  x:Name="IsValid" Header="选中" AllowEditing="False" AllowSorting="False" Width="40" VisibleIndex="0">
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Data.IsValid}" x:Name="checkBox" HorizontalAlignment="Center" VerticalAlignment="Center" Click="checkBox_Click" >
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn Header="姓名" Width="Auto" Name="gcn_PI_V_Name" FieldName="PI_V_Name" VisibleIndex="1"/>
+                                <dxg:GridColumn Header="注册号" Width="Auto"  Name="gcn_VL_V_SerialNumber" FieldName="VL_V_SerialNumber" VisibleIndex="2"/>
+                                <dxg:GridColumn Header="流水号" Width="Auto" Name="gcn_VL_V_ProcessNumber" FieldName="VL_V_ProcessNumber" VisibleIndex="3" />
+                                <dxg:GridColumn Header="检查部位" Width="Auto" Name="gcn_VL_V_StudyBodyPart" FieldName="VL_V_StudyBodyPart" VisibleIndex="4"/>
+                                <dxg:GridColumn Header="检查日期" Width="Auto" Name="gcn_VL_D_RegistrationDate" FieldName="VL_D_RegistrationDate" VisibleIndex="5"/>
+
+                                <dxg:GridColumn Header="发卡状态" Width="Auto" Name="gcn_VL_I_State" FieldName="VL_V_State" VisibleIndex="6"/>
+                                <dxg:GridColumn Header="审核医生状态" Width="Auto" Name="gcn_VL_V_VerifyReport" FieldName="DD_FLAG_CHECK_v" VisibleIndex="7"/>
+                                <dxg:GridColumn Header="贴纸打印状态" Width="Auto" Name="gcn_VL_I_SickState" FieldName="VL_V_SickPrintState" VisibleIndex="8"/>
+                                <dxg:GridColumn Header="报告打印状态" Width="Auto" Name="gcn_VL_I_MedicalState" FieldName="VL_V_RePrintState" VisibleIndex="9"/>
+
+                                <dxg:GridColumn Header="年龄" Width="Auto" Name="gcn_PI_I_Age" FieldName="PI_I_Age" VisibleIndex="10"/>
+                                <dxg:GridColumn Header="性别" Width="Auto" Name="gcn_PI_V_Sex" FieldName="PI_V_Sex" VisibleIndex="11"/>
+                                <dxg:GridColumn Header="就诊卡号" Width="Auto" Name="gcn_VL_PI_V_CardCode" FieldName="PI_V_CardCode" VisibleIndex="12"/>
+
+                                <!--<dxg:GridColumn Header="医保卡卡号" Width="Auto" Name="gcn_PI_V_MedicareNumber" FieldName="PI_V_MedicareNumber" VisibleIndex="13"/>
+                                <dxg:GridColumn Header="身份证号" Width="Auto" Name="gcn_PI_V_IDNumber" FieldName="PI_V_IDNumber" VisibleIndex="14"/>-->
+                                <dxg:GridColumn Header="电话" Width="Auto" Name="gcn_PI_V_Phone" FieldName="PI_V_Phone" VisibleIndex="15"/>
+                                <dxg:GridColumn Header="家庭地址" Width="Auto" Name="gcn_PI_V_Address" FieldName="PI_V_Address" VisibleIndex="16"/>
+                                <!--<dxg:GridColumn Header="就诊医院" Width="Auto"  Name="gcn_VL_V_HospitalName" FieldName="VL_V_HospitalName" VisibleIndex="17"/>-->
+
+                                <!--<dxg:GridColumn Header="科室" Width="Auto"  Name="gcn_VL_V_DeptName" FieldName="VL_V_StudyDeptName" VisibleIndex="18"/>-->
+                                <dxg:GridColumn Header="检查方法" Width="Auto" Name="gcn_IM_V_VALUE" FieldName="VL_I_StudyMethod_Name" VisibleIndex="19"/>
+                                <!--<dxg:GridColumn Header="病程类型" Width="Auto" Name="gcn_CC_V_Name" FieldName="VL_V_DiseaseCategory_ID " VisibleIndex="20"/>-->
+                                <dxg:GridColumn Header="病室" Width="Auto" Name="gcn_VL_V_RoomNum" FieldName="VL_V_RoomNum" VisibleIndex="21"/>
+                                <dxg:GridColumn Header="床号" Width="Auto" Name="gcn_VL_V_BedNum" FieldName="VL_V_BedNum" VisibleIndex="22"/>
+                                <!--<dxg:GridColumn Header="报告医生ID" Width="Auto" Name="gcn_VL_V_ReportID" FieldName="DD_CHECK_DOC_ID" VisibleIndex="23"/>-->
+                                <dxg:GridColumn Header="报告医生姓名" Width="Auto" Name="gcn_VL_V_ReportName" FieldName="DD_SUBMIT_DOC_NAME" VisibleIndex="24"/>
+                                <dxg:GridColumn Header="审核医生姓名" Width="Auto" Name="gcn_VL_V_VerifyName" FieldName="DD_CHECK_DOC_NAME" VisibleIndex="25"/>
+                                <dxg:GridColumn Header="报告日期" Width="Auto" Name="gcn_VL_D_ReportDate" FieldName="DD_CHECK_DATETIME" VisibleIndex="26"/>
+
+                                <!--<dxg:GridColumn Header="诊断" Width="Auto" Name="gcn_DD_T_Diagnosis" FieldName="DD_T_DIAGNOSIS" VisibleIndex="27"/>
+                                <dxg:GridColumn Header="自述" Width="Auto" Name="gcn_DD_T_Readme" FieldName="DD_T_ILLSUMMARY" VisibleIndex="28"/>
+                                <dxg:GridColumn Header="影像所见" Width="Auto" Name="gcn_DD_T_ImagingFindings" FieldName="DD_T_DICOMFindings" VisibleIndex="29"/>
+                                <dxg:GridColumn Header="影像结论" Width="Auto" Name="gcn_DD_T_ImagingConclusion" FieldName="DD_T_DICOMConclusion" VisibleIndex="30"/>-->
+
+                                <!--<dxg:GridColumn Header="报告审核标志" Width="Auto" Name="gcn_VL_V_VerifyReport" FieldName="VL_V_VerifyReport" VisibleIndex="31" Visible="False"/>-->
+                            </dxg:GridControl.Columns>
+                            <dxg:GridControl.View>
+                                <dxg:TableView x:Name="tableView1"  AllowEditing="False" RowStyle="{StaticResource optimizedRowStyle}" ShowGroupPanel="False" ShowTotalSummary="True" EditorButtonShowMode="ShowForFocusedRow"/>
+                                <!--RowStyle="{StaticResource optimizedRowStyle}"-->
+                            </dxg:GridControl.View>
+                        </dxg:GridControl>
+                    </dxb:BarManager>
+                    <TextBox x:Name="textBox" Height="309" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                </DockPanel>
+
+
+                <DockPanel x:Name="longing" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="-10,3,10,-3" >
+                    <local:LoadingWait x:Name="_loading"  Visibility="Hidden" />
+                </DockPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+
+</Window>

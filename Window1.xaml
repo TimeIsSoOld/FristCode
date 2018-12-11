@@ -1,0 +1,16 @@
+﻿<Window x:Class="SUNC_Main_DoctorProcess.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="300"
+        xmlns:local="clr-namespace:SUNC_Main_DoctorProcess">
+    <Grid Background="SkyBlue">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Click="Button_Click_1" Height="50" Width="100" >等待</Button>
+            <Button Height="50" Width="100"  Click="Button_Click" Content="结束等待"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center">
+            <local:LoadingWait x:Name="_loading"  Visibility="Collapsed"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

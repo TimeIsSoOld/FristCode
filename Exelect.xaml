@@ -1,0 +1,109 @@
+﻿<Window x:Class="SUNC_Main_DoctorProcess.Exelect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SUNC_Main_DoctorProcess"
+        mc:Ignorable="d"
+        Title="Exelect" Height="800" Width="1000">
+    <Grid>
+        <Grid Background="#FFD6F7FD">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition><!--0-->
+                <RowDefinition></RowDefinition><!--1-->
+                <RowDefinition></RowDefinition><!--2-->
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="今日统计" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
+            <Label x:Name="daySum" Content="本日总发卡数：" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+            <Label Grid.Row="1" Grid.Column="0" Content="本周统计" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
+            <Label x:Name="WeeklySum" Grid.Column="0" Grid.Row="1" Content="本周总发卡数：" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+            <Label Grid.Row="2" Grid.Column="0"  Content="本月及历史总计" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition><!--0-->
+                    <ColumnDefinition></ColumnDefinition><!--1-->
+                    <ColumnDefinition></ColumnDefinition><!--2-->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition><!--0-->
+                    <RowDefinition></RowDefinition><!--1-->
+                    <RowDefinition></RowDefinition><!--2-->
+                    <RowDefinition></RowDefinition><!--3-->
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="终     端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="1" Grid.Column="0" Content="成     功" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="2" Grid.Column="0" Content="失     败" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="3" Grid.Column="0" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Content="自助发卡终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="0" Grid.Column="2" Content="护士监控终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="AIsuccessc" Grid.Row="1" Grid.Column="1" Content="成功数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="AIlose" Grid.Row="2" Grid.Column="1" Content="失败数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="AISum" Grid.Row="3" Grid.Column="1" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="MOsuccessc" Grid.Row="1" Grid.Column="2" Content="成功数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="MOlose" Grid.Row="2" Grid.Column="2" Content="失败数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="MOSum" Grid.Row="3" Grid.Column="2" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <!--0-->
+                    <ColumnDefinition></ColumnDefinition>
+                    <!--1-->
+                    <ColumnDefinition></ColumnDefinition>
+                    <!--2-->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <!--0-->
+                    <RowDefinition></RowDefinition>
+                    <!--1-->
+                    <RowDefinition></RowDefinition>
+                    <!--2-->
+                    <RowDefinition></RowDefinition>
+                    <!--3-->
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="终     端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="1" Grid.Column="0" Content="成     功" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="2" Grid.Column="0" Content="失     败" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="3" Grid.Column="0" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Content="自助发卡终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label Grid.Row="0" Grid.Column="2" Content="护士监控终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WAIsuccessc" Grid.Row="1" Grid.Column="1" Content="成功数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WAIlose" Grid.Row="2" Grid.Column="1" Content="失败数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WAISum" Grid.Row="3" Grid.Column="1" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WMOsuccessc" Grid.Row="1" Grid.Column="2" Content="成功数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WMOlose" Grid.Row="2" Grid.Column="2" Content="失败数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+                <Label x:Name="WMOSum" Grid.Row="3" Grid.Column="2" Content="总刷卡数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></Label>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition><!--0-->
+                    <RowDefinition></RowDefinition><!--1-->
+                    <RowDefinition></RowDefinition><!--2-->
+                    <RowDefinition></RowDefinition><!--3-->
+                    <RowDefinition></RowDefinition><!--4-->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition><!--0-->
+                    <ColumnDefinition></ColumnDefinition><!--1-->
+                    <ColumnDefinition></ColumnDefinition><!--2-->
+                    <ColumnDefinition></ColumnDefinition><!--3-->
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="本      月" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
+                <Label Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Content="历史发卡记录" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
+                <Label Grid.Column="0" Grid.Row="1" Content="自助发卡终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label Grid.Column="1" Grid.Row="1" Content="护士监控终端" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label Grid.Column="0" Grid.Row="2" Content="成       功" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label Grid.Column="1" Grid.Row="2" Content="失       败" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label x:Name="MAIsuccessc" Grid.Column="0" Grid.Row="3" Content="成功数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label x:Name="MAIlose" Grid.Column="1" Grid.Row="3" Content="失败数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Content="成功发出卡片总计" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+                <Label  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Content="成功发出卡片总计" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"></Label>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

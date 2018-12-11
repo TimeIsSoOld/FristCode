@@ -1,0 +1,17 @@
+﻿<Window x:Class="SUNC_Main_DoctorProcess.Londing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Londing" Height="300" Width="300"  WindowStyle="None" >
+    <Grid>
+        <Grid Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="cols" Height="30" Width="70" Background="SkyBlue" Content="确认" Foreground="White" FontSize="15" Grid.Row="3" Click="cols_Click"/>
+            <Label x:Name="tishi" Grid.Row="2" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" ></Label>
+        </Grid>
+    </Grid>
+</Window>
